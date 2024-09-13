@@ -1,20 +1,24 @@
-
-require('dotenv').config();
-const app = require('fastify')({ logger: true });
-const { DEFAULT } = require('./src/config');
-const connectDB = require('./src/config/db/connection');
-// const { buildAdminRouter } = require('./src/config/setup');
+import 'dotenv/config'
+import Fastify from 'fastify'
+import { connectDB } from './src/config/db/connection.js';
+import { buildAdminRouter } from './src/config/setup.js';
 
 
 const start = async () => {
     try {
-        // await buildAdminRouter(app)
-
-        // await sequelize.sync({ force: true }); // Synchronize the models
+        const app = Fastify()
+        await buildAdminRouter(app)
         await connectDB()
-        await app.listen({ port: DEFAULT.PORT || 3000 });
+        await app.listen({ port: process.env.PORT || 3000 }, (err, address) => {
+            if (err) {
+                console.log(err, 'Error in starting the server');
+            }
+            else {
+                console.log(`Server listening at PORT ${process.env.PORT}`);
+            }
+        })
     } catch (err) {
-        console.log(err, 'Error in starting the server');
+        console.log(err, '<<--CatchError in starting the server');
     }
 };
 

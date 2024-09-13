@@ -1,4 +1,5 @@
-const DB = {
+
+export const DB = {
     HOST: process.env.DB_HOST,
     DATABASE: process.env.DB_NAME,
     USER: process.env.DB_USER,
@@ -6,10 +7,9 @@ const DB = {
     DIALECT: process.env.DIALECT,
     URI: process.env.MONGO_URI
 };
-
-const DEFAULT = {
+export const DEFAULT = {
     PORT: process.env.DB_PORT,
     COOKIE_PASSWORD: process.env.COOKIE_PASSWORD,
+    NODE_ENV: process.env.NODE_ENV
 }
 
-module.exports = { DB, DEFAULT };

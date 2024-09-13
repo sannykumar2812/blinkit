@@ -1,40 +1,42 @@
 import AdminJS from "adminjs";
 import * as AdminJSMongoose from "@adminjs/mongoose";
-import * as Models from "./models";
 import AdminJSFastify from "@adminjs/fastify";
-import { sessionStore } from "./config";
-import { DEFAULT } from ".";
-import { Authenticate } from "./config";
+import { sessionStore } from "./config.js";
 
-AdminJS.registerAdapters({
-    AdminJSMongoose
+import { Admin, Customer, DeliveryPartner } from "./models/users.js";
+import { authenticate } from "./config.js";
+import { DEFAULT } from "./db/index.js";
+import { Branch } from "./models/branch.js";
+AdminJS.registerAdapter({
+    Resource: AdminJSMongoose.Resource,
+    Database: AdminJSMongoose.Database,
 })
 
 export const admin = new AdminJS({
     resources: [
         {
-            resource: Models.Customer,
+            resource: Customer,
             options: {
                 listProperties: ['phone', 'role', "isActivated"],
                 filterProperties: ['phone', 'role'],
             }
         },
         {
-            resource: Models.DeliveryPartner,
+            resource: DeliveryPartner,
             options: {
                 listProperties: ['email', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
         {
-            resource: Models.Admin,
+            resource: Admin,
             options: {
                 listProperties: ['email', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
         {
-            resource: Models.Branch,
+            resource: Branch,
         }
     ],
     branding: {
@@ -45,10 +47,10 @@ export const admin = new AdminJS({
 })
 
 export const buildAdminRouter = async (app) => {
-    await AdminJSFastify.buildeAuthenticatedRouter(admin, {
-        Authenticate,
+    await AdminJSFastify.buildAuthenticatedRouter(admin, {
+        authenticate,
         cookieName: "adminjs",
-        cookiePassword: DEFAULT.COOKIE_PASSWORD
+        cookiePassword: DEFAULT.COOKIE_PASSWORD,
     }, app, {
         store: sessionStore,
         saveUnintialized: true,
@@ -60,3 +62,4 @@ export const buildAdminRouter = async (app) => {
     }
     )
 }
+
