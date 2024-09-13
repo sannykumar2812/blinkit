@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import Fastify from 'fastify'
 import { connectDB } from './src/config/db/connection.js';
-import { buildAdminRouter } from './src/config/setup.js';
+import { buildAdminRouter, admin } from './src/config/setup.js';
+import { DEFAULT } from './src/config/db/index.js';
 
 
 const start = async () => {
@@ -9,12 +10,12 @@ const start = async () => {
         const app = Fastify()
         await buildAdminRouter(app)
         await connectDB()
-        await app.listen({ port: process.env.PORT || 3000 }, (err, address) => {
+        await app.listen({ port: DEFAULT.PORT || 3000 }, (err, address) => {
             if (err) {
                 console.log(err, 'Error in starting the server');
             }
             else {
-                console.log(`Server listening at PORT ${process.env.PORT}`);
+                console.log(`Server listening at  http://localhost:${DEFAULT.PORT}${admin.options.rootPath}`,);
             }
         })
     } catch (err) {

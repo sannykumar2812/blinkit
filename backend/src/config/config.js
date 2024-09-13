@@ -19,10 +19,22 @@ sessionStore.on('error', (err) => {
 })
 
 export const authenticate = async (email, password) => {
-
-    if (email === 'sunnykusingh2812@gmail.com' && password === '123456') {
-        return Promise.resolve({ email: email, password: password })
-    } else {
-        return null
+    if (email && password) {
+        const user = await Admin.findOne({ email: email })
+        if (!user) {
+            return null
+        }
+        if (user.password === password) {
+            return Promise.resolve({ email: email, password: password })
+        }
+        else {
+            return null
+        }
     }
+    return null
+    // if (email === 'sunnykusingh2812@gmail.com' && password === '123456') {
+    //     return Promise.resolve({ email: email, password: password })
+    // } else {
+    //     return null
+    // }
 }

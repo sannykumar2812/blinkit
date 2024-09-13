@@ -8,7 +8,7 @@ export const DB = {
     URI: process.env.MONGO_URI
 };
 export const DEFAULT = {
-    PORT: process.env.DB_PORT,
+    PORT: process.env.PORT,
     COOKIE_PASSWORD: process.env.COOKIE_PASSWORD,
     NODE_ENV: process.env.NODE_ENV
 }

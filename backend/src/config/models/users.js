@@ -82,12 +82,15 @@ const AdminSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-
     role: {
         type: String,
         enum: ['Admin'],
         default: ['Admin']
     },
+    password: {
+        type: String,
+        required: true
+    }
 
 })
 
