@@ -2,13 +2,11 @@ import AdminJS from "adminjs";
 import * as AdminJSMongoose from "@adminjs/mongoose";
 import AdminJSFastify from "@adminjs/fastify";
 import { sessionStore } from "./config.js";
-
-import { Admin, Customer, DeliveryPartner } from "./models/users.js";
 import { authenticate } from "./config.js";
 import { DEFAULT } from "./db/index.js";
-import { Branch } from "./models/branch.js";
 import { dark, light, noSidebar } from "@adminjs/themes"
 import { ICONS } from "../Asset/Icons/Icons.js";
+import { Models } from "../config/models/index.js";
 AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
     Database: AdminJSMongoose.Database,
@@ -17,28 +15,33 @@ AdminJS.registerAdapter({
 export const admin = new AdminJS({
     resources: [
         {
-            resource: Customer,
+            resource: Models.Customer,
             options: {
                 listProperties: ["name", 'phone', 'address', 'role', "isActivated"],
                 filterProperties: ['phone', 'role'],
             }
         },
         {
-            resource: DeliveryPartner,
+            resource: Models.DeliveryPartner,
             options: {
                 listProperties: ['name', 'phone', 'email', 'branch', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
         {
-            resource: Admin,
+            resource: Models.Admin,
             options: {
                 listProperties: ['name', 'email', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
         {
-            resource: Branch,
+            resource: Models.Branch,
+        },
+        {
+            resource: Models.Product,
+        }, {
+            resource: Models.Category,
         }
     ],
     branding: {
