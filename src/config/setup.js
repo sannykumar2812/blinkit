@@ -7,6 +7,7 @@ import { Admin, Customer, DeliveryPartner } from "./models/users.js";
 import { authenticate } from "./config.js";
 import { DEFAULT } from "./db/index.js";
 import { Branch } from "./models/branch.js";
+import { dark, light, noSidebar } from "@adminjs/themes"
 AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
     Database: AdminJSMongoose.Database,
@@ -43,6 +44,8 @@ export const admin = new AdminJS({
         companyName: "Sunny's Blinkit",
         withMadeWithLove: false
     },
+    defaultTheme: dark.id,
+    availableThemes: [light, dark, noSidebar],
     rootPath: "/admin",
 })
 

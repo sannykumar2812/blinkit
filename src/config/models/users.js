@@ -29,7 +29,7 @@ const CustomerSchema = new mongoose.Schema({
         enum: ['Customer'],
         default: 'Customer'
     },
-    livelocation: {
+    'Live location': {
         latitude: { type: Number },
         longitude: { type: Number }
     },
@@ -57,7 +57,7 @@ const DeliveryPartnerSchema = new mongoose.Schema({
         enum: ['DeliveryPartner'],
         default: 'DeliveryPartner'
     },
-    livelocation: {
+    "Live location": {
         latitude: { type: Number },
         longitude: { type: Number }
     },
