@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import mongoose from 'mongoose';
-import { DB } from './src/config/db/index.js';
 import { products, categories } from './seedData.js';
 
 import { Models } from './src/config/models/index.js';

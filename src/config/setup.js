@@ -35,14 +35,11 @@ export const admin = new AdminJS({
                 filterProperties: ['email', 'role'],
             }
         },
-        {
-            resource: Models.Branch,
-        },
-        {
-            resource: Models.Product,
-        }, {
-            resource: Models.Category,
-        }
+        { resource: Models.Branch },
+        { resource: Models.Product },
+        { resource: Models.Category },
+        { resource: Models.Counter },
+        { resource: Models.Order }
     ],
     branding: {
         companyName: "Sunny's here !",
