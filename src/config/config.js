@@ -5,7 +5,7 @@ import connectMongodbSession from 'connect-mongodb-session';
 // import { DB } from './db';
 // import { Admin } from './models';
 // import { DB, DEFAULT } from '.'
-
+import { Admin } from './models/users.js';
 const MongoDBStore = connectMongodbSession(fastifySession);
 
 export const sessionStore = new MongoDBStore({

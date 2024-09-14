@@ -8,6 +8,7 @@ import { authenticate } from "./config.js";
 import { DEFAULT } from "./db/index.js";
 import { Branch } from "./models/branch.js";
 import { dark, light, noSidebar } from "@adminjs/themes"
+import { ICONS } from "../Asset/Icons/Icons.js";
 AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
     Database: AdminJSMongoose.Database,
@@ -18,21 +19,21 @@ export const admin = new AdminJS({
         {
             resource: Customer,
             options: {
-                listProperties: ['phone', 'role', "isActivated"],
+                listProperties: ["name", 'phone', 'address', 'role', "isActivated"],
                 filterProperties: ['phone', 'role'],
             }
         },
         {
             resource: DeliveryPartner,
             options: {
-                listProperties: ['email', 'role', "isActivated"],
+                listProperties: ['name', 'phone', 'email', 'branch', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
         {
             resource: Admin,
             options: {
-                listProperties: ['email', 'role', "isActivated"],
+                listProperties: ['name', 'email', 'role', "isActivated"],
                 filterProperties: ['email', 'role'],
             }
         },
@@ -41,8 +42,10 @@ export const admin = new AdminJS({
         }
     ],
     branding: {
-        companyName: "Sunny's Blinkit",
-        withMadeWithLove: false
+        companyName: "Sunny's here !",
+        withMadeWithLove: false,
+        favicon: ICONS.Favicon_icon,
+        // logo: ICONS.Favicon_icon
     },
     defaultTheme: dark.id,
     availableThemes: [light, dark, noSidebar],
