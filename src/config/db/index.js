@@ -10,6 +10,8 @@ export const DB = {
 export const DEFAULT = {
     PORT: process.env.PORT,
     COOKIE_PASSWORD: process.env.COOKIE_PASSWORD,
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
+    ACCESS_TOKEN: process.env.ACCESS_TOKEN_SECRET,
+    REFRESH_TOKEN: process.env.REFRESH_TOKEN_SECRET
 }
 
