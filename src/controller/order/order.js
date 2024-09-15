@@ -55,7 +55,7 @@ const confirmOrder = async (req, reply) => {
         if (!order) return reply.status(404).send({ message: 'Order not found' })
         if (order.status !== 'available') return reply.status(400).send({ message: 'Order is not available' })
         order.status = 'confirmed'
-        order.deliveryPerson = userId
+        order.deliveryPartner = userId
         order.deliveryPersonLocation = {
             latitude: deliveryPersonLocation?.latitude,
             longitude: deliveryPersonLocation?.longitude,
@@ -81,7 +81,6 @@ const updateOrderStatus = async (req, reply) => {
 
         if (!order) return reply.status(404).send({ message: 'Order not found' })
         if (['cancelled', 'delivered'].includes(order.status)) return reply.status(400).send({ message: 'Order cannot be updated' })
-
         if (order.deliveryPartner?.toString() !== userId) return reply.status(403).send({ message: 'Unauthorized' })
         order.status = status
         order.deliveryPersonLocation = deliveryPersonLocation
@@ -112,7 +111,7 @@ const getOrders = async (req, reply) => {
             query.branch = branchId
         }
         const orders = await Order.find(query).populate('customer deliveryPartner branch items.item')
-        return reply.send({ message: 'Orders fetched', orders })
+        return reply.send({ message: 'Orders fetched', count: orders.length, orders })
     } catch (err) {
         return reply.status(500).send({ message: 'Failed to get orders', err })
     }
@@ -124,7 +123,7 @@ const getOrdersbyId = async (req, reply) => {
         const { orderId } = req.params
         const order = await Order.findById(orderId).populate('customer deliveryPartner branch items.item')
         if (!order) return reply.status(404).send({ message: 'Order not found' })
-        return reply.send({ message: 'Order fetched', order })
+        return reply.send({ message: 'Order fetched', count: order.length, order })
     } catch (err) {
         return reply.status(500).send({ message: 'Failed to get orders', err })
     }
