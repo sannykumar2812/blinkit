@@ -6,7 +6,7 @@ import { authenticate } from "./config.js";
 import { DEFAULT } from "./db/index.js";
 import { dark, light, noSidebar } from "@adminjs/themes"
 import { ICONS } from "../Asset/Icons/Icons.js";
-import { Models } from "../config/models/index.js";
+import { Models } from "../models/index.js";
 AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
     Database: AdminJSMongoose.Database,

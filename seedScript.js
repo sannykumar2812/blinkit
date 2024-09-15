@@ -3,7 +3,7 @@ dotenv.config();
 import mongoose from 'mongoose';
 import { products, categories } from './seedData.js';
 
-import { Models } from './src/config/models/index.js';
+import { Models } from './src/models/index.js';
 async function seedDatabase() {
     try {
         await mongoose.connect(process.env.MONGO_URI);
